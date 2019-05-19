@@ -8,8 +8,8 @@ import { trigger, state, style, transition, animate} from '@angular/animations';
 
 @Component({
   selector: 'app-chords',
-  templateUrl: './chords.component.html',
-  styleUrls: ['./chords.component.scss'],
+  templateUrl: './piano.component.html',
+  styleUrls: ['./piano.component.scss'],
   animations: [
     trigger('whiteKeyDownUp', [
       state('up', style({
@@ -49,7 +49,7 @@ import { trigger, state, style, transition, animate} from '@angular/animations';
     ])
   ]
 })
-export class ChordsComponent implements OnInit {
+export class PianoComponent implements OnInit {
 
   public notes = {};
   public whites = [];

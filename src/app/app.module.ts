@@ -4,13 +4,13 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ChordsComponent } from './chords/chords.component';
+import { PianoComponent } from './piano/piano.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChordsComponent
+    PianoComponent,
   ],
   imports: [
     BrowserModule,
