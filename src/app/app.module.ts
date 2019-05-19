@@ -6,11 +6,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PianoComponent } from './piano/piano.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ChordsComponent } from './chords/chords.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PianoComponent,
+    ChordsComponent,
   ],
   imports: [
     BrowserModule,

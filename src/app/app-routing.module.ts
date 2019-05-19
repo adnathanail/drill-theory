@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PianoComponent } from './piano/piano.component';
+import { ChordsComponent } from './chords/chords.component';
 
 const routes: Routes = [
-  { path: '', component: PianoComponent }
+  { path: '', component: ChordsComponent }
 ];
 
 @NgModule({

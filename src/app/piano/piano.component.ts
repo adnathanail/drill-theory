@@ -4,10 +4,12 @@ import webmidi from 'webmidi';
 import { Input } from 'webmidi';
 import { ChangeDetectorRef} from '@angular/core';
 import { trigger, state, style, transition, animate} from '@angular/animations';
+import { PianoService } from '../piano.service';
 
+import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-chords',
+  selector: 'piano-component',
   templateUrl: './piano.component.html',
   styleUrls: ['./piano.component.scss'],
   animations: [
@@ -56,21 +58,25 @@ export class PianoComponent implements OnInit {
   public blacks = [];
   public inputs: Input[] = [];
   public MIDIInputName = "MPK Mini Mk II";
+  subscription: Subscription;
 
-  constructor(private ref: ChangeDetectorRef) {
+  constructor(private ref: ChangeDetectorRef, private pianoService: PianoService) {
     for (let i of ["1","2","3","4","5","6","7","8"]) {
       for (let j of ["C","D","E","F","G","A","B"]){
-        this.notes[j+i] = false;
         this.whites.push(j+i);
       }
       for (let j of ["C#", "D#", "F#", "G#", "A#"]) {
-        this.notes[j+i] = false;
         this.blacks.push(j+i);
         if (["D#","A#"].includes(j)) {
           this.blacks.push("");
         }
       }
     }
+    this.subscription = this.pianoService.notesSource.subscribe(
+      notes => {
+        this.notes = notes;
+      }
+    )
   }
 
   ngOnInit() {
@@ -79,10 +85,12 @@ export class PianoComponent implements OnInit {
     WebMidi.enable(function (err) {
       console.log(err);
       that.inputs = WebMidi.inputs;
-      console.log(WebMidi.inputs);
-      console.log(that.MIDIInputName);
       that.changeInput();
     });
+  }
+  ngOnDestroy() {
+    // prevent memory leak when component destroyed
+    this.subscription.unsubscribe();
   }
   range(n: number): number[] {
     return Array.from(Array(n).keys());
@@ -97,11 +105,11 @@ export class PianoComponent implements OnInit {
     if (input) {
       let that = this;
       input.addListener('noteon', "all", function(e) {
-        that.notes[e.note.name + e.note.octave] = true;
+        that.pianoService.updateNote(e.note.name + e.note.octave, true);
         that.ref.detectChanges();
       });
       input.addListener('noteoff', "all", function(e) {
-        that.notes[e.note.name + e.note.octave] = false;
+        that.pianoService.updateNote(e.note.name + e.note.octave, false);
         that.ref.detectChanges();
       });
     }
