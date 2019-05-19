@@ -36,9 +36,10 @@ export class ChordsComponent implements OnInit {
   private detectChord() {
     // List of notes current pressed without octave numbers
     var notes = this.notes.map(key => key.slice(0,-1)).sort();
+    var uniqueNotes = Array.from(new Set(notes))
     // Find chord
     for (let chordName in this.chords) {
-      if(arraysEqual(notes, this.chords[chordName])) {
+      if(arraysEqual(uniqueNotes, this.chords[chordName])) {
         return chordName
       }
     }
