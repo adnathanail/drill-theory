@@ -4,7 +4,7 @@ import webmidi from 'webmidi';
 import { Input } from 'webmidi';
 import { ChangeDetectorRef} from '@angular/core';
 import { trigger, state, style, transition, animate} from '@angular/animations';
-import { PianoService } from '../piano.service';
+import { PianoService } from './piano.service';
 
 import { Subscription } from 'rxjs';
 
