@@ -14,18 +14,18 @@ export class ChordsComponent implements OnInit {
   private chordQuestionGenerator = new ChordQuestionGenerator();
 
   chordSubscription: Subscription;
-  private chord = "";
+  private question = "";
 
   constructor(private ref: ChangeDetectorRef, private pianoService: PianoService) {
     this.chordSubscription = this.pianoService.chordSource.subscribe(
       chord => {
-        this.chord = chord;
         if (this.chordQuestionGenerator.checkAnswer(chord)) {
-          this.chordQuestionGenerator.nextQuestion();
+          this.question = this.chordQuestionGenerator.nextQuestion();
         }
         this.ref.detectChanges();
       }
     )
+    this.question = this.chordQuestionGenerator.nextQuestion();
   }
 
   ngOnInit() {

@@ -1,19 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatSelectModule, MatOptionModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PianoComponent } from './piano/piano.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChordsComponent } from './chords/chords.component';
+import { ScalesComponent } from './scales/scales.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PianoComponent,
     ChordsComponent,
+    ScalesComponent,
   ],
   imports: [
     BrowserModule,
@@ -21,7 +24,8 @@ import { ChordsComponent } from './chords/chords.component';
     BrowserAnimationsModule,
     FormsModule,
 
-    MatButtonModule, MatCheckboxModule,
+    MatButtonModule, MatCheckboxModule, MatSelectModule, MatOptionModule,
+    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

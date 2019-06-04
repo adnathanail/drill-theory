@@ -11,6 +11,7 @@ export class PianoService {
   private chords = generateChords();
 
   notesSource = new Subject<Object>();
+  noteSource = new Subject<string>();
   chordSource = new Subject<string>();
 
   constructor() {
@@ -30,13 +31,18 @@ export class PianoService {
         return chordName
       }
     }
+    return "";
   }
 
   updateNote(note: string, value: boolean) {
-    this.notes[note] = value;
-    this.activeNotes = Object.keys(this.notes).filter(key => this.notes[key]);
+    if(value) {
+      this.noteSource.next(note);
+    }
 
+    this.notes[note] = value;
     this.notesSource.next(this.notes);
+
+    this.activeNotes = Object.keys(this.notes).filter(key => this.notes[key]);
     this.chordSource.next(this.detectChord());
   }
 }

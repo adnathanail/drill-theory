@@ -52,3 +52,16 @@ export function generateChords() {
   }
   return chords;
 }
+export let scalepatterns = {
+  "Ionian": [0, 2, 4, 5, 7, 9, 11, 12],
+}
+export function generateScales() {
+  var chords = {};
+  for(let root = 21; root < 33; root++) {
+    for(let pat of Object.keys(scalepatterns)) {
+      chords[numToString(root, false) + " " + pat]
+      = scalepatterns[pat].map(nos => numToString(root + nos, false)); // nos - noteoffset
+    }
+  }
+  return chords;
+}

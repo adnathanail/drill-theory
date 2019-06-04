@@ -2,9 +2,15 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ChordsComponent } from './chords/chords.component';
+import { ScalesComponent } from './scales/scales.component';
 
 const routes: Routes = [
-  { path: '', component: ChordsComponent }
+  { path: '',
+    redirectTo: '/chords',
+    pathMatch: 'full'
+  },
+  { path: 'chords', component: ChordsComponent },
+  { path: 'scales', component: ScalesComponent },
 ];
 
 @NgModule({

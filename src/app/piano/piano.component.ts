@@ -54,11 +54,13 @@ import { Subscription } from 'rxjs';
 export class PianoComponent implements OnInit {
 
   public notes = {};
+  public chord = ".";
   public whites = [];
   public blacks = [];
   public inputs: Input[] = [];
   public MIDIInputName = "MPK Mini Mk II";
-  subscription: Subscription;
+  notesSubscription: Subscription;
+  chordSubscription: Subscription;
 
   constructor(private ref: ChangeDetectorRef, private pianoService: PianoService) {
     for (let i of ["1","2","3","4","5","6","7","8"]) {
@@ -72,13 +74,22 @@ export class PianoComponent implements OnInit {
         }
       }
     }
-    this.subscription = this.pianoService.notesSource.subscribe(
+    this.notesSubscription = this.pianoService.notesSource.subscribe(
       notes => {
         this.notes = notes;
       }
     )
+    this.chordSubscription = this.pianoService.chordSource.subscribe(
+      chord => {
+        // console.log(chord);
+        if (chord != "") {
+          this.chord = chord;
+        } else {
+          this.chord = ".";
+        }
+      }
+    )
   }
-
   ngOnInit() {
     var WebMidi = webmidi;
     var that = this;
@@ -90,7 +101,8 @@ export class PianoComponent implements OnInit {
   }
   ngOnDestroy() {
     // prevent memory leak when component destroyed
-    this.subscription.unsubscribe();
+    this.notesSubscription.unsubscribe();
+    this.chordSubscription.unsubscribe();
   }
   range(n: number): number[] {
     return Array.from(Array(n).keys());
