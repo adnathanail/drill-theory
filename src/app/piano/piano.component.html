@@ -10,7 +10,7 @@
       <a mat-raised-button color="primary" routerLink="/chords">Chords</a>
       <a mat-raised-button color="primary" routerLink="/scales">Scales</a>
       <a mat-raised-button color="primary">Intervals</a>
-      <a mat-raised-button color="primary">Cadences</a>
+      <a mat-raised-button color="primary" routerLink="/progressions">Progressions</a>
     </div>
     <div> <!-- Piano column-->
       <svg width="700" height="150" xmlns="http://www.w3.org/2000/svg">
@@ -25,11 +25,6 @@
   </div>
   <div> <!-- MIDI dropdown and Chord display column-->
     <div fxLayout="column" >
-      <!-- <div>
-        <mat-select [(ngModel)]="MIDIInputName" (change)="changeInput()">
-          <mat-option *ngFor="let input of inputs;" [value]="input.name">{{ input.name }}</mat-option>
-        </mat-select>
-      </div> -->
       <div><p>You're playing</p></div>
       <div><p class="chordName">{{ chord }}</p></div>
       <div><p>Chord</p></div>

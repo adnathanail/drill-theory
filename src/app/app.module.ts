@@ -10,6 +10,7 @@ import { PianoComponent } from './piano/piano.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChordsComponent } from './chords/chords.component';
 import { ScalesComponent } from './scales/scales.component';
+import { ProgressionsComponent } from './progressions/progressions.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ScalesComponent } from './scales/scales.component';
     PianoComponent,
     ChordsComponent,
     ScalesComponent,
+    ProgressionsComponent,
   ],
   imports: [
     BrowserModule,

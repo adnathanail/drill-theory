@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ChordsComponent } from './chords/chords.component';
 import { ScalesComponent } from './scales/scales.component';
+import { ProgressionsComponent } from './progressions/progressions.component';
 
 const routes: Routes = [
   { path: '',
@@ -11,6 +12,7 @@ const routes: Routes = [
   },
   { path: 'chords', component: ChordsComponent },
   { path: 'scales', component: ScalesComponent },
+  { path: 'progressions', component: ProgressionsComponent },
 ];
 
 @NgModule({
