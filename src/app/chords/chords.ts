@@ -4,7 +4,7 @@ import { chordpatterns } from '../data';
 export class ChordQuestionGenerator {
   private enableSharps = false
   private enableNaturals = true
-  private enableChords = {"": true, "7": false, "maj7": false, "m": true, "m7": false, "mmaj7": false, "dim": false, "dim7": false,};
+  private enableChords = {"": false, "7": false, "maj7": false, "m": false, "m7": false, "mmaj7": false, "dim": false, "dim7": true,};
 
   private enabledChordNames = [];
   public question = "";
@@ -22,11 +22,12 @@ export class ChordQuestionGenerator {
         }
       }
     }
+    console.log(this.enabledChordNames);
+    this.nextQuestion();
   }
   
   constructor() {
     this.generateChordNames();
-    this.nextQuestion();
   }
 
   public nextQuestion() {
@@ -34,8 +35,8 @@ export class ChordQuestionGenerator {
     return this.question;
   }
 
-  public checkAnswer(chord: string) {
-    if (chord == this.question) {
+  public checkAnswer(chords: string[]) {
+    if (chords.includes(this.question)) {
       return true
     }
     return false

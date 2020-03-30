@@ -79,11 +79,10 @@ export class PianoComponent implements OnInit {
         this.notes = notes;
       }
     )
-    this.chordSubscription = this.pianoService.chordSource.subscribe(
-      chord => {
-        // console.log(chord);
-        if (chord != "") {
-          this.chord = chord;
+    this.chordSubscription = this.pianoService.chordsSource.subscribe(
+      chords => {
+        if (chords.length > 0) {
+          this.chord = chords[0];
         } else {
           this.chord = ".";
         }

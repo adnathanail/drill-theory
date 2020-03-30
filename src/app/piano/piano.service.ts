@@ -12,7 +12,7 @@ export class PianoService {
 
   notesSource = new Subject<Object>();
   noteSource = new Subject<string>();
-  chordSource = new Subject<string>();
+  chordsSource = new Subject<string[]>();
 
   constructor() {
     for (let i of octaves) {
@@ -26,12 +26,13 @@ export class PianoService {
     var notes = this.activeNotes.map(note => note.slice(0,-1)).sort();
     var uniqueNotes = Array.from(new Set(notes))
     // Find chord
+    let chords: string[] = [];
     for (let chordName in this.chords) {
       if(arraysEqual(uniqueNotes, this.chords[chordName])) {
-        return chordName
+        chords.push(chordName);
       }
     }
-    return "";
+    return chords;
   }
 
   updateNote(note: string, value: boolean) {
@@ -43,7 +44,7 @@ export class PianoService {
     this.notesSource.next(this.notes);
 
     this.activeNotes = Object.keys(this.notes).filter(key => this.notes[key]);
-    this.chordSource.next(this.detectChord());
+    this.chordsSource.next(this.detectChord());
   }
 }
 
