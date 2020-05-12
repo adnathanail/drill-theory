@@ -29,7 +29,6 @@ import { ProgressionsComponent } from './progressions/progressions.component';
     FormsModule,
 
     MatButtonModule, MatCheckboxModule, MatSelectModule, MatOptionModule,
-    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
