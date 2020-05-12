@@ -2,11 +2,11 @@ import { numToString } from '../data';
 import { chordpatterns } from '../data';
 
 export class ChordQuestionGenerator {
-  private enableSharps = false
-  private enableNaturals = true
-  private enableChords = {"": false, "7": false, "maj7": false, "m": false, "m7": false, "mmaj7": false, "dim": false, "dim7": true,};
+  public enableSharps = false
+  public enableNaturals = true
+  public enableChords = {"": false, "7": false, "maj7": false, "m": false, "m7": false, "mmaj7": false, "dim": false, "dim7": true,};
 
-  private enabledChordNames = [];
+  public enabledChordNames = [];
   public question = "";
 
   public generateChordNames() {

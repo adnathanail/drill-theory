@@ -14,8 +14,8 @@ export class ScalesComponent implements OnInit {
   private scaleQuestionGenerator = new ScaleQuestionGenerator();
 
   noteSubscription: Subscription;
-  private question = "";
-  private progress = "";
+  public question = "";
+  public progress = "";
 
   constructor(private ref: ChangeDetectorRef, private pianoService: PianoService) {
     this.noteSubscription = this.pianoService.noteSource.subscribe(

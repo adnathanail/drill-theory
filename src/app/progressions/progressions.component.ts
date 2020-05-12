@@ -11,11 +11,11 @@ import { Subscription } from 'rxjs';
 })
 export class ProgressionsComponent implements OnInit {
 
-  private progressionQuestionGenerator = new ProgressionQuestionGenerator();
+  public progressionQuestionGenerator = new ProgressionQuestionGenerator();
 
   noteSubscription: Subscription;
-  private question = "";
-  private progress = "";
+  public question = "";
+  public progress = "";
 
   constructor(private ref: ChangeDetectorRef, private pianoService: PianoService) {
     this.noteSubscription = this.pianoService.noteSource.subscribe(

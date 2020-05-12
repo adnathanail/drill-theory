@@ -12,7 +12,7 @@ export class ProgressionQuestionGenerator {
 
   private enabledScaleNames = [];
   private scale: string = "";
-  private progression = [];
+  public progression = [];
   private scales = generateScales();
   private chords = generateChords();
 
