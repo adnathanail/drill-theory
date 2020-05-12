@@ -49,7 +49,6 @@ export class ScaleQuestionGenerator {
       this.sequence = [];
       return true;
     }
-    console.log(this.sequence);
   }
 
   public getProgressString() {
