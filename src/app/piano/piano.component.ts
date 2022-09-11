@@ -58,7 +58,7 @@ export class PianoComponent implements OnInit {
   public whites = [];
   public blacks = [];
   public inputs: Input[] = [];
-  public MIDIInputName = "LUMI Keys BLOCK";
+  public MIDIInputName = "Roland Digital Piano";
   notesSubscription: Subscription;
   chordSubscription: Subscription;
 
