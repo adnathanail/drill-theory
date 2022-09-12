@@ -1,82 +1,107 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>DrillTheory</title>
-  <base href="/">
+  <head>
+    <meta charset="utf-8" />
+    <title>DrillTheory</title>
+    <base href="/" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
-<body>
-  <app-root></app-root>
-  <script src='https://surikov.github.io/webaudiofont/npm/dist/WebAudioFontPlayer.js'></script>
-  <script src='https://surikov.github.io/webaudiofontdata/sound/0000_JCLive_sf2_file.js'></script>
-  <script>
-    var tone = _tone_0000_JCLive_sf2_file;
-    var AudioContextFunc = window.AudioContext || window.webkitAudioContext;
-    var audioContext = new AudioContextFunc();
-    var player = new WebAudioFontPlayer();
-    var midiNotes = [];
-    player.loader.decodeAfterLoading(audioContext, '_tone_0000_JCLive_sf2_file');
-    function midNoteOn(pitch, velocity) {
-      midiNoteOff(pitch);
-      var envelope = player.queueWaveTable(audioContext, audioContext.destination, tone, 0, pitch, 123456789, velocity / 100);
-      var note = {
-        pitch: pitch,
-        envelope: envelope
-      };
-      midiNotes.push(note);
-    }
-    function midiNoteOff(pitch) {
-      for (var i = 0; i < midiNotes.length; i++) {
-        if (midiNotes[i].pitch == pitch) {
-          if (midiNotes[i].envelope) {
-            midiNotes[i].envelope.cancel();
-          }
-          midiNotes.splice(i, 1);
-          return;
-        }
-      }
-    }
-    function midiOnMIDImessage(event) {
-      var data = event.data;
-      var cmd = data[0] >> 4;
-      var channel = data[0] & 0xf;
-      var type = data[0] & 0xf0;
-      var pitch = data[1];
-      var velocity = data[2];
-      switch (type) {
-      case 144:
-        midNoteOn(pitch, velocity);
-        break;
-      case 128:
-        midiNoteOff(pitch);
-        break;
-      }
-    }
-    if (navigator.requestMIDIAccess) {
-      console.log('navigator.requestMIDIAccess ok');
-      navigator.requestMIDIAccess().then(
-        function(midi) { // Success
-          var inputs = midi.inputs.values();
-          for (var input = inputs.next(); input && !input.done; input = inputs.next()) {
-            console.log('midi input', input);
-            input.value.onmidimessage = midiOnMIDImessage;
-          }
-          midi.onstatechange = function(event) {
-            console.log('midiOnStateChange', event);
-            console.log(event.port.manufacturer + ' ' + event.port.name + ' ' + event.port.state);
-          };
-        },
-        function(e) { // Failure
-          console.log('requestMIDIAccessFailure', e);
-        }
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet" />
+  </head>
+  <body>
+    <app-root></app-root>
+    <script src="https://surikov.github.io/webaudiofont/npm/dist/WebAudioFontPlayer.js"></script>
+    <script src="https://surikov.github.io/webaudiofontdata/sound/0000_JCLive_sf2_file.js"></script>
+    <script>
+      var tone = _tone_0000_JCLive_sf2_file;
+      var AudioContextFunc = window.AudioContext || window.webkitAudioContext;
+      var audioContext = new AudioContextFunc();
+      var player = new WebAudioFontPlayer();
+      var midiNotes = [];
+      player.loader.decodeAfterLoading(
+        audioContext,
+        '_tone_0000_JCLive_sf2_file'
       );
-    } else {
-      console.log('navigator.requestMIDIAccess undefined');
-    }
-  </script>
-</body>
+      function midNoteOn(pitch, velocity) {
+        midiNoteOff(pitch);
+        var envelope = player.queueWaveTable(
+          audioContext,
+          audioContext.destination,
+          tone,
+          0,
+          pitch,
+          123456789,
+          velocity / 100
+        );
+        var note = {
+          pitch: pitch,
+          envelope: envelope,
+        };
+        midiNotes.push(note);
+      }
+      function midiNoteOff(pitch) {
+        for (var i = 0; i < midiNotes.length; i++) {
+          if (midiNotes[i].pitch == pitch) {
+            if (midiNotes[i].envelope) {
+              midiNotes[i].envelope.cancel();
+            }
+            midiNotes.splice(i, 1);
+            return;
+          }
+        }
+      }
+      function midiOnMIDImessage(event) {
+        var data = event.data;
+        var cmd = data[0] >> 4;
+        var channel = data[0] & 0xf;
+        var type = data[0] & 0xf0;
+        var pitch = data[1];
+        var velocity = data[2];
+        switch (type) {
+          case 144:
+            midNoteOn(pitch, velocity);
+            break;
+          case 128:
+            midiNoteOff(pitch);
+            break;
+        }
+      }
+      if (navigator.requestMIDIAccess) {
+        console.log('navigator.requestMIDIAccess ok');
+        navigator.requestMIDIAccess().then(
+          function (midi) {
+            // Success
+            var inputs = midi.inputs.values();
+            for (
+              var input = inputs.next();
+              input && !input.done;
+              input = inputs.next()
+            ) {
+              console.log('midi input', input);
+              input.value.onmidimessage = midiOnMIDImessage;
+            }
+            midi.onstatechange = function (event) {
+              console.log('midiOnStateChange', event);
+              console.log(
+                event.port.manufacturer +
+                  ' ' +
+                  event.port.name +
+                  ' ' +
+                  event.port.state
+              );
+            };
+          },
+          function (e) {
+            // Failure
+            console.log('requestMIDIAccessFailure', e);
+          }
+        );
+      } else {
+        console.log('navigator.requestMIDIAccess undefined');
+      }
+    </script>
+  </body>
 </html>

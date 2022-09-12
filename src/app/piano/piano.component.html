@@ -4,29 +4,57 @@
       <mat-form-field>
         <mat-label>Select MIDI Input</mat-label>
         <mat-select [(ngModel)]="MIDIInputName" (change)="changeInput()">
-          <mat-option *ngFor="let input of inputs;" [value]="input.name">{{ input.name }}</mat-option>
+          <mat-option *ngFor="let input of inputs" [value]="input.name">{{
+            input.name
+          }}</mat-option>
         </mat-select>
       </mat-form-field>
       <a mat-raised-button color="primary" routerLink="/chords">Chords</a>
       <a mat-raised-button color="primary" routerLink="/scales">Scales</a>
       <a mat-raised-button color="primary">Intervals</a>
-      <a mat-raised-button color="primary" routerLink="/progressions">Progressions</a>
+      <a mat-raised-button color="primary" routerLink="/progressions"
+        >Progressions</a
+      >
     </div>
-    <div> <!-- Piano column-->
+    <div>
+      <!-- Piano column-->
       <svg width="700" height="150" xmlns="http://www.w3.org/2000/svg">
         <g>
-          <rect *ngFor="let i of range(14)" [@whiteKeyDownUp]="notes[whites[i+14]] ? 'down' : 'up'" height="150" width="50" y="0" [attr.x]="i*50" stroke-width="3" stroke="#000" fill="#fff" class="white"/>
+          <rect
+            *ngFor="let i of range(14)"
+            [@whiteKeyDownUp]="notes[whites[i + 14]] ? 'down' : 'up'"
+            height="150"
+            width="50"
+            y="0"
+            [attr.x]="i * 50"
+            stroke-width="3"
+            stroke="#000"
+            fill="#fff"
+            class="white" />
           <g *ngFor="let i of range(14)">
-            <rect *ngIf="blacks[i+14] != ''" [@blackKeyDownUp]="notes[blacks[i+14]] ? 'down' : 'up'" height="100" width="30" y="0" [attr.x]="(i+1)*50 - 15" stroke-width="3" stroke="#000" fill="#000" class="black"/>
+            <rect
+              *ngIf="blacks[i + 14] != ''"
+              [@blackKeyDownUp]="notes[blacks[i + 14]] ? 'down' : 'up'"
+              height="100"
+              width="30"
+              y="0"
+              [attr.x]="(i + 1) * 50 - 15"
+              stroke-width="3"
+              stroke="#000"
+              fill="#000"
+              class="black" />
           </g>
         </g>
       </svg>
     </div>
   </div>
-  <div> <!-- MIDI dropdown and Chord display column-->
-    <div fxLayout="column" >
+  <div>
+    <!-- MIDI dropdown and Chord display column-->
+    <div fxLayout="column">
       <div><p>You're playing</p></div>
-      <div><p class="chordName">{{ chord }}</p></div>
+      <div>
+        <p class="chordName">{{ chord }}</p>
+      </div>
       <div><p>Chord</p></div>
     </div>
   </div>

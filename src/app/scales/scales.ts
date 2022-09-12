@@ -1,31 +1,33 @@
 import { numToString, scalepatterns, generateScales } from '../data';
 
 export class ScaleQuestionGenerator {
-  private enableSharps = true
-  private enableNaturals = true
+  private enableSharps = true;
+  private enableNaturals = true;
 
-  private enabledScaleModes = {"Ionian": true,};
+  private enabledScaleModes = { Ionian: true };
   private enabledScaleNames = [];
   private scales = generateScales();
 
   private sequence = [];
-  public question = "";
+  public question = '';
 
   public generateChordNames() {
     this.enabledScaleNames = [];
-    for(let root = 21; root < 33; root++) {
+    for (let root = 21; root < 33; root++) {
       let note = numToString(root, false);
       if (
         (note.length == 1 || this.enableSharps) &&
         (note.length == 2 || this.enableNaturals)
       ) {
-        for(let pat of Object.keys(scalepatterns).filter(pat => this.enabledScaleModes[pat])) {
-          this.enabledScaleNames.push(note + " " + pat);
+        for (let pat of Object.keys(scalepatterns).filter(
+          pat => this.enabledScaleModes[pat]
+        )) {
+          this.enabledScaleNames.push(note + ' ' + pat);
         }
       }
     }
   }
-  
+
   constructor() {
     this.generateChordNames();
     this.nextQuestion();
@@ -33,15 +35,18 @@ export class ScaleQuestionGenerator {
   }
 
   public nextQuestion() {
-    this.question = this.enabledScaleNames[Math.floor(Math.random() * this.enabledScaleNames.length)];
+    this.question =
+      this.enabledScaleNames[
+        Math.floor(Math.random() * this.enabledScaleNames.length)
+      ];
     return this.question;
   }
 
   public nextNote(note: string) {
-    this.sequence.push(note.slice(0,-1));
+    this.sequence.push(note.slice(0, -1));
     let i;
-    for (i=0; i<this.sequence.length; i++) {
-      if(this.scales[this.question][i] != this.sequence[i]) {
+    for (i = 0; i < this.sequence.length; i++) {
+      if (this.scales[this.question][i] != this.sequence[i]) {
         this.sequence = [];
       }
     }
@@ -52,12 +57,12 @@ export class ScaleQuestionGenerator {
   }
 
   public getProgressString() {
-    let outstr = "";
-    for(let i = 0; i<this.scales[this.question].length; i++) {
+    let outstr = '';
+    for (let i = 0; i < this.scales[this.question].length; i++) {
       if (i < this.sequence.length) {
-        outstr += this.sequence[i] + " "
+        outstr += this.sequence[i] + ' ';
       } else {
-        outstr += "● "
+        outstr += '● ';
       }
     }
     return outstr.slice(0, -1);

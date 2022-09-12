@@ -1,10 +1,21 @@
-<p *ngIf="chordQuestionGenerator.question">Play {{ chordQuestionGenerator.question }} chord</p>
+<p *ngIf="chordQuestionGenerator.question">
+  Play {{ chordQuestionGenerator.question }} chord
+</p>
 <p *ngIf="!chordQuestionGenerator.question">No chords enabled!</p>
-<mat-checkbox [(ngModel)]="chordQuestionGenerator.enableSharps" (change)="chordQuestionGenerator.generateChordNames()"></mat-checkbox> Sharps
-<mat-checkbox [(ngModel)]="chordQuestionGenerator.enableNaturals" (change)="chordQuestionGenerator.generateChordNames()"></mat-checkbox> Naturals
+<mat-checkbox
+  [(ngModel)]="chordQuestionGenerator.enableSharps"
+  (change)="chordQuestionGenerator.generateChordNames()"></mat-checkbox>
+Sharps
+<mat-checkbox
+  [(ngModel)]="chordQuestionGenerator.enableNaturals"
+  (change)="chordQuestionGenerator.generateChordNames()"></mat-checkbox>
+Naturals
 <br />
 <br />
 <h3>Enabled chord types</h3>
 <div *ngFor="let item of chordQuestionGenerator.enableChords | keyvalue">
-  <mat-checkbox [(ngModel)]="chordQuestionGenerator.enableChords[item.key]" (change)="chordQuestionGenerator.generateChordNames()"></mat-checkbox> {{ chordNames[item.key] }}
+  <mat-checkbox
+    [(ngModel)]="chordQuestionGenerator.enableChords[item.key]"
+    (change)="chordQuestionGenerator.generateChordNames()"></mat-checkbox>
+  {{ chordNames[item.key] }}
 </div>

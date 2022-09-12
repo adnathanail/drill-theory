@@ -28,9 +28,12 @@ import { ProgressionsComponent } from './progressions/progressions.component';
     BrowserAnimationsModule,
     FormsModule,
 
-    MatButtonModule, MatCheckboxModule, MatSelectModule, MatOptionModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatSelectModule,
+    MatOptionModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

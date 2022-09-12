@@ -8,9 +8,8 @@ describe('ChordsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChordsComponent ]
-    })
-    .compileComponents();
+      declarations: [ChordsComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

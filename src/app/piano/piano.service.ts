@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { octaves, noteNames, generateChords } from '../data';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PianoService {
   private notes = {};
@@ -16,19 +16,19 @@ export class PianoService {
 
   constructor() {
     for (let i of octaves) {
-      for (let j of noteNames){
-        this.notes[j+i] = false;
+      for (let j of noteNames) {
+        this.notes[j + i] = false;
       }
     }
   }
   private detectChord() {
     // List of notes current pressed without octave numbers
-    var notes = this.activeNotes.map(note => note.slice(0,-1)).sort();
-    var uniqueNotes = Array.from(new Set(notes))
+    var notes = this.activeNotes.map(note => note.slice(0, -1)).sort();
+    var uniqueNotes = Array.from(new Set(notes));
     // Find chord
     let chords: string[] = [];
     for (let chordName in this.chords) {
-      if(arraysEqual(uniqueNotes, this.chords[chordName])) {
+      if (arraysEqual(uniqueNotes, this.chords[chordName])) {
         chords.push(chordName);
       }
     }
@@ -36,7 +36,7 @@ export class PianoService {
   }
 
   updateNote(note: string, value: boolean) {
-    if(value) {
+    if (value) {
       this.noteSource.next(note);
     }
 

@@ -8,9 +8,8 @@ describe('ScalesComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ScalesComponent ]
-    })
-    .compileComponents();
+      declarations: [ScalesComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
