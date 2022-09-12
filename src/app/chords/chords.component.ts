@@ -12,9 +12,9 @@ import { chordNames } from '../data';
 })
 export class ChordsComponent implements OnInit {
   public chordQuestionGenerator = new ChordQuestionGenerator();
+  public chordNames = chordNames;
 
-  chordSubscription: Subscription;
-  private chordNames = chordNames;
+  private chordSubscription: Subscription;
 
   constructor(
     private ref: ChangeDetectorRef,
