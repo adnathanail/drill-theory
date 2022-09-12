@@ -13,6 +13,7 @@ import {
 import { PianoService } from './piano.service';
 
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'piano-component',
@@ -73,7 +74,8 @@ export class PianoComponent implements OnInit {
 
   constructor(
     private ref: ChangeDetectorRef,
-    private pianoService: PianoService
+    private pianoService: PianoService,
+    public router: Router
   ) {
     for (let i of ['1', '2', '3', '4', '5', '6', '7', '8']) {
       for (let j of ['C', 'D', 'E', 'F', 'G', 'A', 'B']) {

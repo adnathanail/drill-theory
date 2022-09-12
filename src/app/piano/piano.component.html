@@ -9,12 +9,12 @@
           }}</mat-option>
         </mat-select>
       </mat-form-field>
-      <a mat-raised-button color="primary" routerLink="/chords">Chords</a>
-      <a mat-raised-button color="primary" routerLink="/scales">Scales</a>
-      <a mat-raised-button color="primary">Intervals</a>
-      <a mat-raised-button color="primary" routerLink="/progressions"
-        >Progressions</a
-      >
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <a class="btn" [ngClass]="{'btn-primary': router.url === '/chords', 'btn-outline-primary': router.url !== '/chords'}" routerLink="/chords">Chords</a>
+        <a class="btn" [ngClass]="{'btn-primary': router.url === '/scales', 'btn-outline-primary': router.url !== '/scales'}" routerLink="/scales">Scales</a>
+        <a class="btn" [ngClass]="{'btn-primary': router.url === '/intervals', 'btn-outline-primary': router.url !== '/intervals'}">Intervals</a>
+        <a class="btn" [ngClass]="{'btn-primary': router.url === '/progressions', 'btn-outline-primary': router.url !== '/progressions'}" routerLink="/progressions">Progressions</a>
+      </div>
     </div>
     <div>
       <!-- Piano column-->
