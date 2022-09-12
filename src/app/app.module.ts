@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChordsComponent } from './chords/chords.component';
 import { ScalesComponent } from './scales/scales.component';
 import { ProgressionsComponent } from './progressions/progressions.component';
+import { PiecesComponent } from './pieces/pieces.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ProgressionsComponent } from './progressions/progressions.component';
     ChordsComponent,
     ScalesComponent,
     ProgressionsComponent,
+    PiecesComponent,
   ],
   imports: [
     BrowserModule,
