@@ -13,6 +13,13 @@ export let noteNames = [
   'A#',
   'B',
 ];
+export let enharmonicNotes = {
+  'C#': 'Db',
+  'D#': 'Eb',
+  'F#': 'Gb',
+  'G#': 'Ab',
+  'A#': 'Bb',
+};
 export let chordpatterns = {
   '': [0, 4, 7],
   '7': [0, 4, 7, 10],

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
 import { PianoService } from '../piano/piano.service';
 import { Subscription } from 'rxjs';
@@ -10,7 +10,7 @@ import { chordNames } from '../data';
   templateUrl: './chords.component.html',
   styleUrls: ['./chords.component.scss'],
 })
-export class ChordsComponent implements OnInit {
+export class ChordsComponent implements OnInit, OnDestroy {
   public chordQuestionGenerator = new ChordQuestionGenerator();
   public chordNames = chordNames;
 

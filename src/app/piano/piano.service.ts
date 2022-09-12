@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { octaves, noteNames, generateChords } from '../data';
+import { octaves, noteNames, generateChords, enharmonicNotes } from '../data';
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +30,10 @@ export class PianoService {
     for (let chordName in this.chords) {
       if (arraysEqual(uniqueNotes, this.chords[chordName])) {
         chords.push(chordName);
+        const splitChord = chordName.split(' ');
+        if (splitChord[0] in enharmonicNotes) {
+          chords.push(enharmonicNotes[splitChord[0]] + ' ' + splitChord[1]);
+        }
       }
     }
     return chords;
