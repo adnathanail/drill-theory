@@ -1,4 +1,4 @@
-import { numToString, scalepatterns, generateScales } from '../data';
+import { numToString, scalepatterns, generateScales } from '../utils/data';
 
 export class ScaleQuestionGenerator {
   private enableSharps = true;

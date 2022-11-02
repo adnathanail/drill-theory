@@ -3,7 +3,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { PianoService } from '../piano/piano.service';
 import { Subscription } from 'rxjs';
 import { ChordQuestionGenerator } from './chords';
-import { chordNames } from '../data';
+import { chordNames } from '../utils/data';
 
 @Component({
   selector: 'app-chords',
@@ -16,18 +16,13 @@ export class ChordsComponent implements OnInit, OnDestroy {
 
   private chordSubscription: Subscription;
 
-  constructor(
-    private ref: ChangeDetectorRef,
-    private pianoService: PianoService
-  ) {
-    this.chordSubscription = this.pianoService.chordsSource.subscribe(
-      chords => {
-        if (this.chordQuestionGenerator.checkAnswer(chords)) {
-          this.chordQuestionGenerator.nextQuestion();
-        }
-        this.ref.detectChanges();
+  constructor(private ref: ChangeDetectorRef, private pianoService: PianoService) {
+    this.chordSubscription = this.pianoService.chordsSource.subscribe(chords => {
+      if (this.chordQuestionGenerator.checkAnswer(chords)) {
+        this.chordQuestionGenerator.nextQuestion();
       }
-    );
+      this.ref.detectChanges();
+    });
   }
 
   ngOnInit() {}

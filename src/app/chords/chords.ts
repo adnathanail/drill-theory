@@ -1,5 +1,5 @@
-import { numToString } from '../data';
-import { chordpatterns } from '../data';
+import { numToString } from '../utils/data';
+import { chordpatterns } from '../utils/data';
 
 export class ChordQuestionGenerator {
   public enableSharps = false;
@@ -22,13 +22,8 @@ export class ChordQuestionGenerator {
     this.enabledChordNames = [];
     for (let root = 21; root < 33; root++) {
       const note = numToString(root, false);
-      if (
-        (note.length === 1 || this.enableSharps) &&
-        (note.length === 2 || this.enableNaturals)
-      ) {
-        for (const pat of Object.keys(chordpatterns).filter(
-          patt => this.enableChords[patt]
-        )) {
+      if ((note.length === 1 || this.enableSharps) && (note.length === 2 || this.enableNaturals)) {
+        for (const pat of Object.keys(chordpatterns).filter(patt => this.enableChords[patt])) {
           this.enabledChordNames.push(note + ' ' + pat);
         }
       }
@@ -42,10 +37,7 @@ export class ChordQuestionGenerator {
   }
 
   public nextQuestion() {
-    this.question =
-      this.enabledChordNames[
-        Math.floor(Math.random() * this.enabledChordNames.length)
-      ];
+    this.question = this.enabledChordNames[Math.floor(Math.random() * this.enabledChordNames.length)];
     return this.question;
   }
 
