@@ -7,7 +7,7 @@ import { Subject, Subscription } from 'rxjs';
 export class ChordQuestionGenerator implements QuestionGenerator {
   public enabledQuestions = [];
   public question = '';
-  public questionSource = new Subject<string>();
+  public pageUpdateSource = new Subject<void>();
 
   private chordSubscription: Subscription;
 
@@ -47,7 +47,7 @@ export class ChordQuestionGenerator implements QuestionGenerator {
   }
   public nextQuestion() {
     this.question = this.enabledQuestions[Math.floor(Math.random() * this.enabledQuestions.length)];
-    this.questionSource.next(this.question);
+    this.pageUpdateSource.next();
   }
   public destroy() {
     this.chordSubscription.unsubscribe();

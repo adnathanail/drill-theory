@@ -16,9 +16,12 @@ export class ChordsComponent implements OnInit, OnDestroy {
 
   private chordQuestionSubscription: Subscription;
 
-  constructor(private ref: ChangeDetectorRef, private pianoService: PianoService) {
+  constructor(
+    private ref: ChangeDetectorRef, //
+    private pianoService: PianoService
+  ) {
     this.chordQuestionGenerator = new ChordQuestionGenerator(pianoService);
-    this.chordQuestionSubscription = this.chordQuestionGenerator.questionSource.subscribe(question => {
+    this.chordQuestionSubscription = this.chordQuestionGenerator.pageUpdateSource.subscribe(() => {
       this.ref.detectChanges();
     });
   }
