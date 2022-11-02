@@ -17,7 +17,7 @@ export class ScalesComponent implements OnInit {
   public progress = '';
 
   constructor(
-    private ref: ChangeDetectorRef,
+    private ref: ChangeDetectorRef, //
     private pianoService: PianoService
   ) {
     this.noteSubscription = this.pianoService.noteSource.subscribe(note => {

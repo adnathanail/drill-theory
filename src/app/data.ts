@@ -60,6 +60,7 @@ export function generateChords() {
 }
 export let scalepatterns = {
   Major: [0, 2, 4, 5, 7, 9, 11, 12],
+  Minor: [0, 2, 3, 5, 7, 8, 10, 12],
 };
 export function generateScales() {
   const chords = {};

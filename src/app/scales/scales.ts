@@ -4,7 +4,7 @@ export class ScaleQuestionGenerator {
   private enableSharps = true;
   private enableNaturals = true;
 
-  private enabledScaleModes = { Ionian: true };
+  private enabledScaleModes = { Major: true, Minor: true };
   private enabledScaleNames = [];
   private scales = generateScales();
 
