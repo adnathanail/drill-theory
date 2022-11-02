@@ -17,7 +17,7 @@ export class ProgressionQuestionGenerator {
   private enableScaleModes = { Ionian: true };
   private enableChords = {
     '': true,
-    '7': true,
+    7: true,
     maj7: false,
     m: true,
     m7: true,

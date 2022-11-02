@@ -14,14 +14,9 @@ export class ScaleQuestionGenerator {
   public generateChordNames() {
     this.enabledScaleNames = [];
     for (let root = 21; root < 33; root++) {
-      let note = numToString(root, false);
-      if (
-        (note.length == 1 || this.enableSharps) &&
-        (note.length == 2 || this.enableNaturals)
-      ) {
-        for (let pat of Object.keys(scalepatterns).filter(
-          pat => this.enabledScaleModes[pat]
-        )) {
+      const note = numToString(root, false);
+      if ((note.length === 1 || this.enableSharps) && (note.length === 2 || this.enableNaturals)) {
+        for (const pat of Object.keys(scalepatterns).filter(patt => this.enabledScaleModes[patt])) {
           this.enabledScaleNames.push(note + ' ' + pat);
         }
       }
@@ -35,10 +30,7 @@ export class ScaleQuestionGenerator {
   }
 
   public nextQuestion() {
-    this.question =
-      this.enabledScaleNames[
-        Math.floor(Math.random() * this.enabledScaleNames.length)
-      ];
+    this.question = this.enabledScaleNames[Math.floor(Math.random() * this.enabledScaleNames.length)];
     return this.question;
   }
 
@@ -46,16 +38,15 @@ export class ScaleQuestionGenerator {
     this.sequence.push(note.slice(0, -1));
     let i;
     for (i = 0; i < this.sequence.length; i++) {
-      if (this.scales[this.question][i] != this.sequence[i]) {
+      if (this.scales[this.question][i] !== this.sequence[i]) {
         this.sequence = [];
       }
     }
-    if (i == this.scales[this.question].length) {
+    if (i === this.scales[this.question].length) {
       this.sequence = [];
       return true;
     }
   }
-
   public getProgressString() {
     let outstr = '';
     for (let i = 0; i < this.scales[this.question].length; i++) {

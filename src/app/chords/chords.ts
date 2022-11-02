@@ -6,7 +6,7 @@ export class ChordQuestionGenerator {
   public enableNaturals = true;
   public enableChords = {
     '': false,
-    '7': false,
+    7: false,
     maj7: false,
     m: false,
     m7: false,
@@ -21,13 +21,13 @@ export class ChordQuestionGenerator {
   public generateChordNames() {
     this.enabledChordNames = [];
     for (let root = 21; root < 33; root++) {
-      let note = numToString(root, false);
+      const note = numToString(root, false);
       if (
-        (note.length == 1 || this.enableSharps) &&
-        (note.length == 2 || this.enableNaturals)
+        (note.length === 1 || this.enableSharps) &&
+        (note.length === 2 || this.enableNaturals)
       ) {
-        for (let pat of Object.keys(chordpatterns).filter(
-          pat => this.enableChords[pat]
+        for (const pat of Object.keys(chordpatterns).filter(
+          patt => this.enableChords[patt]
         )) {
           this.enabledChordNames.push(note + ' ' + pat);
         }
