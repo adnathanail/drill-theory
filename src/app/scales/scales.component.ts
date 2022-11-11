@@ -3,6 +3,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { PianoService } from '../piano/piano.service';
 import { Subscription } from 'rxjs';
 import { ScaleQuestionGenerator } from './scales';
+import { scaleNames } from '../utils/data';
 
 @Component({
   selector: 'app-scales',
@@ -11,6 +12,7 @@ import { ScaleQuestionGenerator } from './scales';
 })
 export class ScalesComponent implements OnInit, OnDestroy {
   public scaleQuestionGenerator: ScaleQuestionGenerator;
+  public scaleNames = scaleNames;
 
   private scaleQuestionSubscription: Subscription;
 

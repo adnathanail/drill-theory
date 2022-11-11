@@ -1,5 +1,24 @@
 <p>Play {{ scaleQuestionGenerator.question }} scale</p>
+<p *ngIf="!scaleQuestionGenerator.question">No scales enabled!</p>
 <p>{{ scaleQuestionGenerator.progress }}</p>
+<input type="checkbox"
+  [(ngModel)]="scaleQuestionGenerator.enableSharps"
+  (change)="scaleQuestionGenerator.generateQuestions()">
+Sharps
+<input type="checkbox"
+  [(ngModel)]="scaleQuestionGenerator.enableNaturals"
+  (change)="scaleQuestionGenerator.generateQuestions()">
+Naturals
+<br />
+<br />
+<h3>Enabled scale types</h3>
+<div *ngFor="let item of scaleQuestionGenerator.enabledScaleModes | keyvalue">
+  <input type="checkbox"
+    [(ngModel)]="scaleQuestionGenerator.enabledScaleModes[item.key]"
+    (change)="scaleQuestionGenerator.generateQuestions()">
+  {{ scaleNames[item.key] }}
+</div>
+
 <!-- <mat-checkbox [(ngModel)]="enableSharps" (change)="generatechordNames()"></mat-checkbox> Sharps
 <mat-checkbox [(ngModel)]="enableNaturals" (change)="generatechordNames()"></mat-checkbox> Naturals
 <div *ngFor="let item of enabledChordTypes | keyvalue">

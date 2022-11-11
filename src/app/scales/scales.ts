@@ -1,4 +1,4 @@
-import { numToString, scalepatterns, generateScales } from '../utils/data';
+import { numToString, scalepatterns, generateScales, scaleNames } from '../utils/data';
 import { QuestionGenerator } from '../models/questionGenerator';
 import { Subject, Subscription } from 'rxjs';
 import { PianoService } from '../piano/piano.service';
@@ -13,10 +13,15 @@ export class ScaleQuestionGenerator implements QuestionGenerator {
   private noteSubscription: Subscription;
   private sequence = [];
 
-  private enableSharps = true;
-  private enableNaturals = true;
+  public enableSharps = false;
+  public enableNaturals = true;
 
-  private enabledScaleModes = { Major: true, Minor: false };
+  public enabledScaleModes = {
+    Major: true, //
+    NaturalMinor: false,
+    HarmonicMinor: false,
+    MelodicMinor: false,
+  };
   private scales = generateScales();
 
   constructor(pianoService: PianoService) {
