@@ -63,12 +63,14 @@ export let scalepatterns = {
   NaturalMinor: [0, 2, 3, 5, 7, 8, 10, 12],
   HarmonicMinor: [0, 2, 3, 5, 7, 8, 11, 12],
   MelodicMinor: [0, 2, 3, 5, 7, 9, 11, 12],
+  Dorian: [0, 2, 3, 5, 7, 9, 10, 12],
 };
 export let scaleNames = {
   Major: 'Major',
   NaturalMinor: 'Natural Minor',
   HarmonicMinor: 'Harmonic Minor',
   MelodicMinor: 'Melodic Minor',
+  Dorian: 'Dorian',
 };
 export function generateScales() {
   const chords = {};

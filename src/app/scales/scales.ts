@@ -21,6 +21,7 @@ export class ScaleQuestionGenerator implements QuestionGenerator {
     NaturalMinor: false,
     HarmonicMinor: false,
     MelodicMinor: false,
+    Dorian: false,
   };
   private scales = generateScales();
 
