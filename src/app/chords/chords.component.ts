@@ -3,7 +3,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { PianoService } from '../piano/piano.service';
 import { Subscription } from 'rxjs';
 import { ChordQuestionGenerator } from './chords';
-import { chordNames } from '../data';
+import { chordNames } from '../utils/data';
 
 @Component({
   selector: 'app-chords',
@@ -11,29 +11,26 @@ import { chordNames } from '../data';
   styleUrls: ['./chords.component.scss'],
 })
 export class ChordsComponent implements OnInit, OnDestroy {
-  public chordQuestionGenerator = new ChordQuestionGenerator();
+  public chordQuestionGenerator: ChordQuestionGenerator;
   public chordNames = chordNames;
 
-  private chordSubscription: Subscription;
+  private chordQuestionSubscription: Subscription;
 
   constructor(
-    private ref: ChangeDetectorRef,
+    private ref: ChangeDetectorRef, //
     private pianoService: PianoService
   ) {
-    this.chordSubscription = this.pianoService.chordsSource.subscribe(
-      chords => {
-        if (this.chordQuestionGenerator.checkAnswer(chords)) {
-          this.chordQuestionGenerator.nextQuestion();
-        }
-        this.ref.detectChanges();
-      }
-    );
+    this.chordQuestionGenerator = new ChordQuestionGenerator(pianoService);
+    this.chordQuestionSubscription = this.chordQuestionGenerator.pageUpdateSource.subscribe(() => {
+      this.ref.detectChanges();
+    });
   }
 
   ngOnInit() {}
 
   ngOnDestroy() {
     // prevent memory leak when component destroyed
-    this.chordSubscription.unsubscribe();
+    this.chordQuestionGenerator.destroy();
+    this.chordQuestionSubscription.unsubscribe();
   }
 }

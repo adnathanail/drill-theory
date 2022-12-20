@@ -4,11 +4,11 @@
 <p *ngIf="!chordQuestionGenerator.question">No chords enabled!</p>
 <input type="checkbox"
   [(ngModel)]="chordQuestionGenerator.enableSharps"
-  (change)="chordQuestionGenerator.generateChordNames()">
+  (change)="chordQuestionGenerator.generateQuestions()">
 Sharps
 <input type="checkbox"
   [(ngModel)]="chordQuestionGenerator.enableNaturals"
-  (change)="chordQuestionGenerator.generateChordNames()">
+  (change)="chordQuestionGenerator.generateQuestions()">
 Naturals
 <br />
 <br />
@@ -16,6 +16,6 @@ Naturals
 <div *ngFor="let item of chordQuestionGenerator.enableChords | keyvalue">
   <input type="checkbox"
     [(ngModel)]="chordQuestionGenerator.enableChords[item.key]"
-    (change)="chordQuestionGenerator.generateChordNames()">
+    (change)="chordQuestionGenerator.generateQuestions()">
   {{ chordNames[item.key] }}
 </div>

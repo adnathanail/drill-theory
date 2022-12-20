@@ -1,40 +1,61 @@
-import { numToString, scalepatterns, generateScales } from '../data';
+import { numToString, scalepatterns, generateScales, scaleNames } from '../utils/data';
+import { QuestionGenerator } from '../models/questionGenerator';
+import { Subject, Subscription } from 'rxjs';
+import { PianoService } from '../piano/piano.service';
 
-export class ScaleQuestionGenerator {
-  private enableSharps = true;
-  private enableNaturals = true;
+export class ScaleQuestionGenerator implements QuestionGenerator {
+  public enabledQuestions = [];
+  public question = '';
+  public pageUpdateSource = new Subject<void>();
 
-  private enabledScaleModes = { Major: true, Minor: true };
-  private enabledScaleNames = [];
+  public progress = '';
+
+  private noteSubscription: Subscription;
+  private sequence = [];
+
+  public enableSharps = false;
+  public enableNaturals = true;
+
+  public enabledScaleModes = {
+    Major: true, //
+    NaturalMinor: false,
+    HarmonicMinor: false,
+    MelodicMinor: false,
+    Dorian: false,
+  };
   private scales = generateScales();
 
-  private sequence = [];
-  public question = '';
-
-  public generateChordNames() {
-    this.enabledScaleNames = [];
+  constructor(pianoService: PianoService) {
+    this.generateQuestions();
+    this.noteSubscription = pianoService.noteSource.subscribe(note => {
+      if (this.nextNote(note)) {
+        this.nextQuestion();
+      }
+      this.progress = this.getProgressString();
+      this.pageUpdateSource.next();
+    });
+  }
+  public generateQuestions() {
+    this.enabledQuestions = [];
     for (let root = 21; root < 33; root++) {
       const note = numToString(root, false);
       if ((note.length === 1 || this.enableSharps) && (note.length === 2 || this.enableNaturals)) {
         for (const pat of Object.keys(scalepatterns).filter(patt => this.enabledScaleModes[patt])) {
-          this.enabledScaleNames.push(note + ' ' + pat);
+          this.enabledQuestions.push(note + ' ' + pat);
         }
       }
     }
-  }
-
-  constructor() {
-    this.generateChordNames();
     this.nextQuestion();
-    console.log(this.scales);
   }
-
   public nextQuestion() {
-    this.question = this.enabledScaleNames[Math.floor(Math.random() * this.enabledScaleNames.length)];
-    return this.question;
+    this.question = this.enabledQuestions[Math.floor(Math.random() * this.enabledQuestions.length)];
+    this.pageUpdateSource.next();
+  }
+  public destroy() {
+    this.noteSubscription.unsubscribe();
   }
 
-  public nextNote(note: string) {
+  private nextNote(note: string) {
     this.sequence.push(note.slice(0, -1));
     let i;
     for (i = 0; i < this.sequence.length; i++) {
